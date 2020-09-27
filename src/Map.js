@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
-import { Icon } from "leaflet";
+import { Map, TileLayer } from "react-leaflet";
 import MapPin from "./Components/MapPin"
 
 const useCurrentLocation = () => {

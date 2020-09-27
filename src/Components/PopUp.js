@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ReactComponent as PinIcon } from '../img/pinicon.svg';
 import { ReactComponent as DisabledIcon } from '../img/disabledicon.svg';
 import { ReactComponent as StarIcon } from '../img/staricon.svg';

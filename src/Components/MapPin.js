@@ -1,4 +1,4 @@
-import React, {lazy, useEffect} from "react";
+import React, { lazy } from "react";
 import { Marker, Popup } from "react-leaflet";
 import {  mapIcon  } from './MapIcon';
 const PopUp = lazy(() => import('./PopUp'));
