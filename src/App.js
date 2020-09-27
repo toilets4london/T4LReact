@@ -1,25 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy, Component, Fragment, useState, useEffect  } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import axios from 'axios';
+const Map = lazy(() => import('./Map'));
+const About = lazy(() => import('./About'));
+
 
 function App() {
+
+  const [toilets, setToilets] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    fetch("https://toilets4london.herokuapp.com/toilets/?page_size=1000")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setToilets(result.results);
+          setIsLoaded(true);
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+          setToilets([]);
+        }
+      )
+  }, [])
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    isLoaded ?
+    <Router>
+      <Suspense fallback={<p>Loading...</p>}>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Map</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/">
+            <Map toilets={toilets}/>
+          </Route>
+        </Switch>
+      </div>
+      </Suspense>
+    </Router>
+    : "Loading"
   );
 }
 
