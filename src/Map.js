@@ -17,6 +17,7 @@ const useCurrentLocation = () => {
 
   const handleError = error => {
     setError(error.message);
+    console.log(error);
   };
 
   useEffect(() => {
@@ -53,6 +54,10 @@ export default function MapComponent(props) {
           id={t.id}
           address={t.address}
           url={t.url}
+          wheelchair={t.wheelchair}
+          name={t.name}
+          ratings={t.ratings}
+          opening={t.opening_hours}
           />)
       })}
     </Map>
