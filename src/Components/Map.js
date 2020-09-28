@@ -3,48 +3,16 @@ import { Map, TileLayer } from "react-leaflet";
 import MapPin from "./MapPin";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
-const useCurrentLocation = () => {
-  const [error, setError] = useState();
-  const [location, setLocation] = useState();
-
-  const handleSuccess = position => {
-    const { latitude, longitude } = position.coords;
-    setLocation({
-      latitude,
-      longitude
-    });
-  };
-
-  const handleError = error => {
-    setError(error.message);
-    console.log(error);
-  };
-
-  useEffect(() => {
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 15000,
-      maximumAge: 0
-    };
-    if (!navigator.geolocation) {
-      setError('Geolocation is not supported.');
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
-  }, []);
-  return { location, error };
-};
-
 export default function MapComponent(props) {
-  var defaultLatitude = 51.5074;
-  var defaultLongitude = 0.1278;
-  const { location, error } = useCurrentLocation();
+  const defaultLatitude = 51.5074;
+  const defaultLongitude = 0.1278;
+  const location = props.location;
 
   return (
     props.toilets.length > 0 ?
     <Map 
       center={[location ? location.latitude : defaultLatitude, location ? location.longitude : defaultLongitude]} 
-      zoom={12}
+      zoom={14}
       animate={false}
       doubleClickZoom={true}
       touchZoom={true}
@@ -70,6 +38,6 @@ export default function MapComponent(props) {
       </MarkerClusterGroup>
     </Map>
     :
-    "Loading"
+    "Unfortunately there was a problem loading the data - please try again later - we may be conducting system maintenance"
   );
 }

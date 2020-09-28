@@ -4,12 +4,6 @@ import { ReactComponent as DisabledIcon } from '../img/disabledicon.svg';
 import { ReactComponent as StarIcon } from '../img/staricon.svg';
 import { ReactComponent as ClockIcon } from '../img/clockicon.svg';
   
-const MapPopUp = {
-    width: "100%",
-    height: "100%",
-    margin: "0",
-    padding: "0"
-}
   
 const PopUpIcon = {
     display: "inline-block",
@@ -29,9 +23,9 @@ const PopUpText = {
     padding: "3%"
 } 
 
-export default function PopUp(props) {
+export default function ToiletPopUp(props) {
     return (
-        <div style={MapPopUp}>
+        <span>
             <PinIcon style={PopUpIcon}/>
             <span style={PopUpText}>{props.address}</span>
             <ClockIcon style={PopUpIcon}/>
@@ -41,7 +35,7 @@ export default function PopUp(props) {
             <StarIcon style={PopUpIcon}/>
             <span style={PopUpText}>{props.rating ? props.rating : "No ratings yet"}</span>
             <p><a href={props.url}>Link to API</a></p>
-        </div>
+        </span>
     );
 }
 

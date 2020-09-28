@@ -1,12 +1,7 @@
 import React, { lazy } from "react";
 import { Marker, Popup } from "react-leaflet";
 import {  mapIcon  } from './MapIcon';
-const PopUp = lazy(() => import('./PopUp'));
-
-
-const LeafletMapPopUp = {
-    filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
-}
+const ToiletPopUp = lazy(() => import('./ToiletPopUp'));
 
 export default function MapPin(props) {
 
@@ -15,8 +10,9 @@ export default function MapPin(props) {
         <Marker position ={[ props.latitude, props.longitude]} 
             key={props.id}
             icon={mapIcon}>
-            <Popup style={LeafletMapPopUp} autoPan={false}>
-                <PopUp address={props.address} 
+            <div>
+            <Popup>
+                <ToiletPopUp address={props.address} 
                     opening={props.opening}
                     name={props.name}
                     url={props.url}
@@ -24,6 +20,7 @@ export default function MapPin(props) {
                     wheelchair={props.wheelchair}
                 />
             </Popup>
+            </div>
         </Marker>
         :
         null
