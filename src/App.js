@@ -42,7 +42,7 @@ function App() {
   const [toilets, setToilets] = useState([]);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { location, locationError } = useCurrentLocation();
+  const { location } = useCurrentLocation();
 
   useEffect(() => {
     client.get('/toilets/?page_size=1000')
