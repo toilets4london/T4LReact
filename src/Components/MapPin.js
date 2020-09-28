@@ -15,7 +15,7 @@ export default function MapPin(props) {
         <Marker position ={[ props.latitude, props.longitude]} 
             key={props.id}
             icon={mapIcon}>
-            <Popup style={LeafletMapPopUp}>
+            <Popup style={LeafletMapPopUp} autoPan={false}>
                 <PopUp address={props.address} 
                     opening={props.opening}
                     name={props.name}

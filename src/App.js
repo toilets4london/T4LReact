@@ -1,7 +1,7 @@
-import React, { Suspense, lazy, useState, useEffect  } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-const Map = lazy(() => import('./Map'));
-const About = lazy(() => import('./About'));
+import Navigation from "./Components/Navigation";
+import { client } from './Client/client';
 
 
 function App() {
@@ -11,11 +11,10 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch("https://toilets4london.herokuapp.com/toilets/?page_size=1000")
-      .then(res => res.json())
+    client.get('/toilets/?page_size=1000')
       .then(
         (result) => {
-          setToilets(result.results);
+          setToilets(result.data.results);
           setIsLoaded(true);
         },
         (error) => {
@@ -30,27 +29,8 @@ function App() {
   return (
     isLoaded ?
     <Router>
-      <Suspense fallback={<p>Loading...</p>}>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Map</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Map toilets={toilets}/>
-          </Route>
-        </Switch>
-      </div>
+      <Suspense fallback="Loading...">
+        <Navigation toilets={toilets} error={error}/>
       </Suspense>
     </Router>
     : "Loading..."
