@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Navigation from "./Components/Navigation";
 import { client } from './Client/client';
 import { ReactComponent as PinIcon } from './img/pinicon.svg';
