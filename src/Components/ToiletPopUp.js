@@ -25,7 +25,7 @@ const PopUpText = {
 
 export default function ToiletPopUp(props) {
     return (
-        <span>
+        <div className="toilet-pop-up">
             <PinIcon style={PopUpIcon}/>
             <span style={PopUpText}>{props.address}</span>
             <ClockIcon style={PopUpIcon}/>
@@ -35,7 +35,7 @@ export default function ToiletPopUp(props) {
             <StarIcon style={PopUpIcon}/>
             <span style={PopUpText}>{props.rating ? props.rating : "No ratings yet"}</span>
             <p><a href={props.url}>Link to API</a></p>
-        </span>
+        </div>
     );
 }
 

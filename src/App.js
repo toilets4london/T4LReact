@@ -2,7 +2,6 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import Navigation from "./Components/Navigation";
 import { client } from './Client/client';
-import { ReactComponent as PinIcon } from './img/pinicon.svg';
 
 const useCurrentLocation = () => {
   const [error, setError] = useState();
@@ -24,7 +23,7 @@ const useCurrentLocation = () => {
   useEffect(() => {
     var options = {
       enableHighAccuracy: true,
-      timeout: 15000,
+      timeout: 5000,
       maximumAge: 0
     };
     if (!navigator.geolocation) {
@@ -42,7 +41,7 @@ function App() {
   const [toilets, setToilets] = useState([]);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { location } = useCurrentLocation();
+  const { location, locationError } = useCurrentLocation();
 
   useEffect(() => {
     client.get('/toilets/?page_size=1000')
@@ -61,13 +60,11 @@ function App() {
 
 
   return (
-    isLoaded ?
     <Router>
       <Suspense fallback="Loading...">
-        <Navigation toilets={toilets} error={error} location={location}/>
+        <Navigation toilets={isLoaded ? toilets : []} error={error} location={location} locationError={locationError}/>
       </Suspense>
     </Router>
-    : <span>Loading toilet data... <PinIcon/></span>
   );
 }
 

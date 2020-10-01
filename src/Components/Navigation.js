@@ -27,7 +27,7 @@ export default function Navigation(props) {
                     <About />
                 </Route>
                 <Route path="/">
-                    <Map toilets={props.toilets} location={props.location} />
+                    <Map toilets={props.toilets} location={props.location} error={props.error} locationError={props.locationError}/>
                 </Route>
             </Switch>
         </div>
