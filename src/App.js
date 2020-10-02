@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import { Navbar, Form, FormControl, Button, Nav } from 'react-bootstrap';
+import { Navbar, Form, FormControl, Button } from 'react-bootstrap';
 import MapComponent from './Components/MapComponent.js';
-import logo from './img/logo.svg';
 
 function App() {
 

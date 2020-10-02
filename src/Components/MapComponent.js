@@ -74,13 +74,13 @@ export default function MapComponent(props) {
   return (
     <div>
       {locationError ? <Alert variant='warning' className="error-alert">
-        Enable geolocation for this website to see toilets near you
+        Geolocation is currently unavailable in this browser
       </Alert> : null}
       {error ? <Alert variant='danger' className="error-alert">
-        Unfortunately there was an error loading toilet data
+        Unfortunately there was an error loading toilet data, try reloading the page
       </Alert> : null}
       {!isLoaded ? <Alert variant='warning' className="error-alert">
-        Loading toilet data
+        Loading toilet data from Toilets4London API ...
       </Alert> : null}
       <Map
         center={center}
