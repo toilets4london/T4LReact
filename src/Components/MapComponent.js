@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Map, TileLayer } from "react-leaflet";
+import { Map, TileLayer, CircleMarker, Popup } from "react-leaflet";
 import MapPin from "./MapPin";
 import { Alert, Button } from 'react-bootstrap';
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { client } from '../Client/client';
+import axios from 'axios';
+import { Card } from 'react-bootstrap';
 
-export default function MapComponent() {
+export default function MapComponent(props) {
 
   const defaultLatitude = 51.5074;
   const defaultLongitude = 0.1277;
@@ -15,6 +17,7 @@ export default function MapComponent() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [locationError, setLocationError] = useState();
   const [center, setCenter] = useState([defaultLatitude, defaultLongitude]);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const mapRef = useRef();
 
   useEffect(() => {
@@ -28,15 +31,27 @@ export default function MapComponent() {
           setIsLoaded(true);
           setError(error);
         }
-      )
-  }, [])
+      );
+  }, []);
+
+  useEffect(() => {
+    if (props.searchQuery !== null) {
+      const fetchData = async () => {
+        const result = await axios(
+          'https://nominatim.openstreetmap.org/search?q='+props.searchQuery+'&format=json&limit=1', 
+        );
+        setCenter([result.data[0].lat, result.data[0].lon]);
+      };
+      fetchData();
+    }
+  }, [props.searchQuery]);
 
   const getLocation = () => {
     const handleLocationError = error => {
       setLocationError(error.message);
     };
     const handleLocationSuccess = position => {
-      console.log(position);
+      setCurrentLocation([position.coords.latitude, position.coords.longitude]);
       const map = mapRef.current.leafletElement;
       const currentCenter = map.getCenter();
       if (currentCenter !== position) {
@@ -69,7 +84,7 @@ export default function MapComponent() {
       </Alert> : null}
       <Map
         center={center}
-        zoom={14}
+        zoom={15}
         animate={false}
         doubleClickZoom={true}
         touchZoom={true}
@@ -79,6 +94,13 @@ export default function MapComponent() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
+        { currentLocation ? 
+          <CircleMarker center = {currentLocation}>
+            <Popup>
+              <Card body>Current location</Card>
+            </Popup>
+          </CircleMarker>
+        : null }
         <MarkerClusterGroup>
           {toilets.map(t => {
             return <MapPin latitude={t.latitude}
@@ -95,7 +117,7 @@ export default function MapComponent() {
             />
           })}
         </MarkerClusterGroup>
-        <Button variant="primary" size="sm" style={{position:"absolute", zIndex:"1000000", right:"5px", top:"5px"}} onClick={getLocation}>
+        <Button variant="primary" size="sm" style={{position:"absolute", zIndex:"401", right:"5px", top:"5px"}} onClick={getLocation}>
           Go to my location
         </Button>
       </Map>
