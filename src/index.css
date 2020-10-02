@@ -1,38 +1,26 @@
-
 .leaflet-container {
   position: absolute;
-  top: 57px;
+  top: 56px;
   left: 0;
   bottom: 0;
   width: 100vw;
-  height: auto;
+  height: calc(100vh - 56px);
 }
 
-[class^="leaflet-popup"] {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  height: 0 !important;
-  color: transparent !important;
-  width: 0 !important;
-  font: 0px/0px !important;
-  background-color: transparent !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  z-index: 0 !important;
+.leaflet-popup-content {
+  margin: 0;
 }
 
-.toilet-pop-up {
-  position: absolute !important;
-  color: black;
-  background-color: white;
-  width: 300px;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  margin-top: -150px;
-  margin-left: -150px;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.leaflet-popup-content-wrapper {
+  box-shadow: none;
+  background: none;
+  padding: 0px;
+}
+
+.error-alert {
+  position: absolute;
+  z-index: 100000;
+  top: 5px;
+  left: 5px;
+  max-width: 50vw;
 }

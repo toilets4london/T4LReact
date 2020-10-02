@@ -1,16 +1,15 @@
-import React, { lazy } from "react";
+import React from "react";
 import { Marker, Popup } from "react-leaflet";
-import { mapIcon } from './MapIcon';
-const ToiletPopUp = lazy(() => import('./ToiletPopUp'));
+import ToiletPopUp from './ToiletPopUp';
 
 export default function MapPin(props) {
 
     return (
         <Marker position={[props.latitude, props.longitude]}
-            key={props.id}
-            icon={mapIcon}>
-            <Popup autoPan={false}>
-                <ToiletPopUp address={props.address}
+            key={props.id}>
+            <Popup autoPan={true}>
+                <ToiletPopUp 
+                    address={props.address}
                     opening={props.opening}
                     name={props.name}
                     url={props.url}
@@ -20,4 +19,5 @@ export default function MapPin(props) {
             </Popup>
         </Marker>
     )
+
 }
