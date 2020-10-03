@@ -1,9 +1,12 @@
-import React from "react";
+import React  from "react";
 import { Card, ListGroup } from 'react-bootstrap';
 
 export default function ToiletPopUp(props) {
+    // useEffect(()=>{
+    //     console.log("showing popup")
+    // },[])
     return (
-        <Card style={{ width: '18rem' }} className="pop-up">
+        <Card className="pop-up">
             <Card.Body>
                 <Card.Title>{props.name ? props.name : "Toilet"}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{props.opening ? props.opening : "Opening hours not provided"}</Card.Subtitle>

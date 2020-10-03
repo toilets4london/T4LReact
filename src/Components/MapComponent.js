@@ -21,24 +21,26 @@ export default function MapComponent(props) {
   const mapRef = useRef();
 
   useEffect(() => {
-    client.get('/toilets/?page_size=1000')
-      .then(
-        (result) => {
-          setToilets(result.data.results);
-          setIsLoaded(true);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  }, []);
+    if (!isLoaded && !error) {
+      client.get('/toilets/?page_size=1000')
+        .then(
+          (result) => {
+            setToilets(result.data.results);
+            setIsLoaded(true);
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+    }
+  }, [error, isLoaded]);
 
   useEffect(() => {
     if (props.searchQuery !== null) {
       const fetchData = async () => {
         const result = await axios(
-          'https://nominatim.openstreetmap.org/search?q='+props.searchQuery+'&format=json&limit=1', 
+          'https://nominatim.openstreetmap.org/search?q=' + props.searchQuery + '&format=json&limit=1',
         );
         setCenter([result.data[0].lat, result.data[0].lon]);
       };
@@ -73,19 +75,19 @@ export default function MapComponent(props) {
 
   return (
     <div>
-      <div className="error-alerts">
-        {locationError ? <Alert variant='warning' className="error-alert">
-          Geolocation is currently unavailable in this browser
+
+      {locationError ? <Alert variant='warning' className="error-alert">
+        Geolocation is currently unavailable in this browser
         </Alert> : null}
-        {error ? <Alert variant='danger' className="error-alert">
-          Unfortunately there was an error loading toilet data, try reloading the page
+      {error ? <Alert variant='danger' className="error-alert">
+        Unfortunately there was an error loading toilet data, try reloading the page
         </Alert> : null}
-        {!isLoaded ? <Alert variant='warning' className="error-alert">
+      {!isLoaded ? <Alert variant='warning' className="error-alert">
           Loading toilet data from Toilets4London API ...
         </Alert> : null}
-      </div>
+
       <Button variant="secondary" size="sm" className="go-to-button" onClick={getLocation}>
-          Go to my location
+        Go to my location
       </Button>
       <Map
         center={center}
@@ -100,14 +102,13 @@ export default function MapComponent(props) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        { currentLocation ? 
-          <CircleMarker center = {currentLocation}>
+        {currentLocation ?
+          <CircleMarker center={currentLocation}>
             <Popup>
               <Card body>Current location</Card>
             </Popup>
           </CircleMarker>
-        : null }
-        <ZoomControl position="bottomright"/>
+          : null}
         <MarkerClusterGroup>
           {toilets.map(t => {
             return <MapPin latitude={t.latitude}
@@ -124,6 +125,7 @@ export default function MapComponent(props) {
             />
           })}
         </MarkerClusterGroup>
+        <ZoomControl position="bottomright" />
       </Map>
     </div>
   );

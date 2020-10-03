@@ -1,31 +1,15 @@
 import React, {useState} from 'react';
-import { Navbar, Form, FormControl, Button } from 'react-bootstrap';
 import MapComponent from './Components/MapComponent.js';
+import SearchBar from './Components/SearchBar.js'
 
 function App() {
 
-  const [searchQuery, setSearchQuery] = React.useState(null);
-  const [expanded, setExpanded] = useState(false);
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    setSearchQuery(event.target.elements.search.value);
-    setExpanded(false);
-    event.target.reset();
-  }
+  const [searchQuery, setSearchQuery] = useState(null);
+  const handleSearch = (query) => setSearchQuery(query);
 
   return (
-    <div>
-      <Navbar bg="primary" variant="dark" style={{"zIndex":"1001", "borderRadius":"1rem"}} expand="md" className="mx-2 my-5" expanded={expanded}>
-        <Navbar.Brand>Toilets4London Map</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")} />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Form inline onSubmit={handleSubmit}>
-            <FormControl type="text" placeholder="Location" className="my-2 mr-sm-2 my-sm-0" name="search"/>
-            <Button variant="outline-light" type="submit" value="Submit">Search</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Navbar>
+    <div className="full-page">
+      <SearchBar handleSearchQuery={handleSearch}/>
       <MapComponent searchQuery={searchQuery}/>
     </div>
   );
