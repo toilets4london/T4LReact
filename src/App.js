@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div>
-      <Navbar bg="primary" variant="dark" style={{"zIndex":"1001"}} expand="md" expanded={expanded}>
+      <Navbar bg="primary" variant="dark" style={{"zIndex":"1001", "borderRadius":"1rem"}} expand="md" className="mx-2 my-5" expanded={expanded}>
         <Navbar.Brand>Toilets4London Map</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")} />
         <Navbar.Collapse id="basic-navbar-nav">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Map, TileLayer, CircleMarker, Popup } from "react-leaflet";
+import { Map, TileLayer, CircleMarker, Popup, ZoomControl } from "react-leaflet";
 import MapPin from "./MapPin";
 import { Alert, Button } from 'react-bootstrap';
 import MarkerClusterGroup from "react-leaflet-markercluster";
@@ -73,15 +73,20 @@ export default function MapComponent(props) {
 
   return (
     <div>
-      {locationError ? <Alert variant='warning' className="error-alert">
-        Geolocation is currently unavailable in this browser
-      </Alert> : null}
-      {error ? <Alert variant='danger' className="error-alert">
-        Unfortunately there was an error loading toilet data, try reloading the page
-      </Alert> : null}
-      {!isLoaded ? <Alert variant='warning' className="error-alert">
-        Loading toilet data from Toilets4London API ...
-      </Alert> : null}
+      <div className="error-alerts">
+        {locationError ? <Alert variant='warning' className="error-alert">
+          Geolocation is currently unavailable in this browser
+        </Alert> : null}
+        {error ? <Alert variant='danger' className="error-alert">
+          Unfortunately there was an error loading toilet data, try reloading the page
+        </Alert> : null}
+        {!isLoaded ? <Alert variant='warning' className="error-alert">
+          Loading toilet data from Toilets4London API ...
+        </Alert> : null}
+      </div>
+      <Button variant="secondary" size="sm" className="go-to-button" onClick={getLocation}>
+          Go to my location
+      </Button>
       <Map
         center={center}
         zoom={15}
@@ -89,6 +94,7 @@ export default function MapComponent(props) {
         doubleClickZoom={true}
         touchZoom={true}
         ref={mapRef}
+        zoomControl={false}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -101,6 +107,7 @@ export default function MapComponent(props) {
             </Popup>
           </CircleMarker>
         : null }
+        <ZoomControl position="bottomright"/>
         <MarkerClusterGroup>
           {toilets.map(t => {
             return <MapPin latitude={t.latitude}
@@ -117,9 +124,6 @@ export default function MapComponent(props) {
             />
           })}
         </MarkerClusterGroup>
-        <Button variant="primary" size="sm" style={{position:"absolute", zIndex:"401", right:"5px", top:"5px"}} onClick={getLocation}>
-          Go to my location
-        </Button>
       </Map>
     </div>
   );
