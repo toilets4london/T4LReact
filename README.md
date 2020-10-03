@@ -1,4 +1,17 @@
-# React Frontend for Toilets4London (a work in progress)
+# React web app to present Toilets4London's data (a work in progress)
+
+Web app currently being hosted [here].
+
+Data comes from the [Toilets4LondonAPI](https://toilets4london.herokuapp.com/) where you can also see [here on Github](https://github.com/toilets4london/Toilets4LondonAPI).
+
+## Credits
+
+The API and therefore this map is currently just providing data extracted from OpenStreetMap. We plan to replace / augment this with accurate and up-to-date information obtained directly from London local authorities. 
+
+© OpenStreetMap contributors
+OpenStreetMap data is available under the Open Database Licence
+
+# Standard Create-React-App readme below...
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
