@@ -2,7 +2,7 @@
 
 Web app currently being hosted [here](https://londontoiletmap.netlify.app/).
 
-Data comes from the [Toilets4LondonAPI](https://toilets4london.herokuapp.com/) where you can also see [here on Github](https://github.com/toilets4london/Toilets4LondonAPI).
+Data comes from the [Toilets4LondonAPI](https://toilets4london.herokuapp.com/) which you can also see [here on Github](https://github.com/toilets4london/Toilets4LondonAPI).
 
 ## Credits
 
