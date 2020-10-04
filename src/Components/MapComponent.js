@@ -122,6 +122,7 @@ export default function MapComponent(props) {
               ratings={t.ratings}
               opening={t.opening_hours}
               baby_change={t.baby_change}
+              currentLatLng={currentLocation ? `${currentLocation[0]}, ${currentLocation[1]}` : null}
             />
           })}
         </MarkerClusterGroup>

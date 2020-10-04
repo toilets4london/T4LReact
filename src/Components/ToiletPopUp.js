@@ -1,26 +1,58 @@
-import React  from "react";
+import React, { useEffect, useState } from "react";
 import { Card, ListGroup } from 'react-bootstrap';
+import { routeMatrixApiClient } from '../Client/routeMatrixApiClient';
 
 export default function ToiletPopUp(props) {
-    // useEffect(()=>{
-    //     console.log("showing popup")
-    // },[])
+
+    const formatDuration = s => {
+        if (s < 0) s = -s;
+        const time = {
+            day: Math.floor(s / 86400),
+            hour: Math.floor(s / 3600) % 24,
+            minute: Math.floor(s / 60) % 60,
+        };
+        return Object.entries(time)
+            .filter(val => val[1] !== 0)
+            .map(val => val[1] + ' ' + (val[1] !== 1 ? val[0] + 's' : val[0]))
+            .join(', ');
+    };
+
+    const [distance, setDistance] = useState(null);
+
+    useEffect(() => {
+        if (props.currentLatLng && props.latLng) {
+            routeMatrixApiClient.post('', {
+                "locations": [
+                    props.currentLatLng,
+                    props.latLng
+                ]
+            })
+                .then(
+                    (result) => {
+                        console.log(result.data.distance[1] + " km");
+                        setDistance(result.data.distance[1]);
+                    },
+                    (error) => {
+                        console.log(error.message)
+                    }
+                );
+        }
+    }, [props.currentLatLng, props.latLng]);
+
     return (
-        <Card className="pop-up">
-            <Card.Body>
-                <Card.Title>{props.name ? props.name : "Toilet"}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{props.opening ? props.opening : "Opening hours not provided"}</Card.Subtitle>
-                <Card.Text>
-                    Full address: {props.address}
-                </Card.Text>
-                <ListGroup variant="flush">
-                    <ListGroup.Item>Wheelchair accessible : {props.wheelchair ? "Yes" : "No"}</ListGroup.Item>
-                    <ListGroup.Item>Baby change facilties : {props.baby_change ? "Yes" : "No"}</ListGroup.Item>
-                    <ListGroup.Item>Rating : {props.rating ? props.rating : "No ratings yet"}</ListGroup.Item>
-                    <ListGroup.Item action href={props.url} target="_blank">Link to API</ListGroup.Item>
-                    <ListGroup.Item action href="#" target="_blank">Leave a review (not available yet)</ListGroup.Item>
-                </ListGroup>
-            </Card.Body>
+        <Card style={{ width: '18rem' }}>
+            <ListGroup variant="flush">
+                {distance ? <ListGroup.Item><b>Distance : </b>{distance.toFixed(1) + " km "}</ListGroup.Item> : null}
+                {distance ? <ListGroup.Item><b>Walking time : </b>{formatDuration(distance * 720)}</ListGroup.Item> : null}
+                {props.opening ? <ListGroup.Item><b>Opening hours : </b>{props.opening}</ListGroup.Item> : null}
+                {props.name ? <ListGroup.Item><b>Name : </b>{props.name}</ListGroup.Item> : null}
+                {props.address ? <ListGroup.Item><b>Full address : </b>{props.address}</ListGroup.Item> : null}
+                <ListGroup.Item><b>Wheelchair accessible : </b>{props.wheelchair ? "Yes" : "No / no data provided"}</ListGroup.Item> 
+                <ListGroup.Item><b>Baby change facilities : </b>{props.baby_change ? "Yes" : "No"}</ListGroup.Item>
+                {props.rating ? <ListGroup.Item><b>Rating : </b>{props.rating}</ListGroup.Item> : null}
+                <ListGroup.Item action href={props.url} target="_blank">Link to API</ListGroup.Item>
+                <ListGroup.Item action href="#" target="_blank">Leave a review (not available yet)</ListGroup.Item>
+            </ListGroup>
         </Card>
     )
 }

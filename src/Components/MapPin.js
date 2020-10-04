@@ -15,6 +15,8 @@ export default function MapPin(props) {
                     url={props.url}
                     rating={props.rating}
                     wheelchair={props.wheelchair}
+                    latLng={`${props.latitude},${props.longitude}`}
+                    currentLatLng={props.currentLatLng}
                 />
             </Popup>
         </Marker>
