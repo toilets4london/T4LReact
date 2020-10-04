@@ -3,7 +3,7 @@ import {cache} from '../Cache/cacheHandler';
 
 const key: String = "jPUpaH7NC0lANswl8XbwadZvtHSRjWC3";
 
-export const routeMatrixApiClient = axios.create({ baseURL: 'http://open.mapquestapi.com/directions/v2/routematrix?key='+key});
+export const routeMatrixApiClient = axios.create({ baseURL: 'https://open.mapquestapi.com/directions/v2/routematrix?key='+key});
 
 routeMatrixApiClient.interceptors.request.use((request) => requestHandler(request));
 routeMatrixApiClient.interceptors.response.use(
