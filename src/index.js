@@ -12,4 +12,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker.register();
+// no service worker for now so that changes get deployed to users immediately
+serviceWorker.unregister();

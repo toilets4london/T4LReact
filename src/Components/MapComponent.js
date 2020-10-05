@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Map, TileLayer, CircleMarker, Popup, ZoomControl } from "react-leaflet";
 import MapPin from "./MapPin";
+import DismissableAlert from "./DismissableAlert";
 import { Alert, Button } from 'react-bootstrap';
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { client } from '../Client/client';
@@ -75,15 +76,16 @@ export default function MapComponent(props) {
 
   return (
     <div>
-
-      {locationError ? <Alert variant='warning' className="error-alert">
-        Geolocation is currently unavailable in this browser
-        </Alert> : null}
+      {locationError ? 
+        <DismissableAlert 
+          message="Geolocation is currently unavailable in this browser, try searching for your location manually"
+        />
+      : null }
       {error ? <Alert variant='danger' className="error-alert">
         Unfortunately there was an error loading toilet data, try reloading the page
         </Alert> : null}
       {!isLoaded ? <Alert variant='warning' className="error-alert">
-          Loading toilet data from Toilets4London API ...
+          Loading toilet data - please wait
         </Alert> : null}
 
       <Button variant="secondary" size="sm" className="go-to-button" onClick={getLocation}>
