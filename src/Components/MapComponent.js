@@ -10,8 +10,8 @@ import { Card } from 'react-bootstrap';
 
 export default function MapComponent(props) {
 
-  const defaultLatitude = 51.5074;
-  const defaultLongitude = 0.1277;
+  const defaultLatitude = 51.509865;
+  const defaultLongitude = -0.118092;
 
   const [toilets, setToilets] = useState([]);
   const [error, setError] = useState(null);
