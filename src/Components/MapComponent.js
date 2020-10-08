@@ -51,6 +51,7 @@ export default function MapComponent(props) {
 
   const getLocation = () => {
     const handleLocationError = error => {
+      console.log(error.message);
       setLocationError(error.message);
     };
     const handleLocationSuccess = position => {
