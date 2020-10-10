@@ -34,3 +34,7 @@
   z-index: 999;
   width: 50vw;
 }
+
+.leaflet-control-zoom {
+  margin-bottom: 15vh !important;
+}
