@@ -23,7 +23,7 @@ export default function MapComponent(props) {
 
   useEffect(() => {
     if (!isLoaded && !error) {
-      client.get('/toilets/?page_size=1000')
+      client.get('/toilets/?page_size=2000')
         .then(
           (result) => {
             setToilets(result.data.results);
