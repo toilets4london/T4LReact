@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import MapComponent from './Components/MapComponent.js';
+import InteractiveMap from './Components/InteractiveMap.js';
 import SearchBar from './Components/SearchBar.js'
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
 
@@ -10,7 +11,7 @@ function App() {
   return (
     <div className="full-page">
       <SearchBar handleSearchQuery={handleSearch}/>
-      <MapComponent searchQuery={searchQuery}/>
+      <InteractiveMap searchQuery={searchQuery}/>
     </div>
   );
 }

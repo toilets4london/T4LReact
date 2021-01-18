@@ -9,8 +9,8 @@
 
 .go-to-button {
   position: relative;
-  margin-top: 12px;
-  margin-left: 12px;
+  margin-top: 5px;
+  margin-left: 16px;
   float: left;
   z-index: 401;
 }
@@ -36,5 +36,16 @@
 }
 
 .leaflet-control-zoom {
-  margin-bottom: 15vh !important;
+  margin-bottom: 60px !important;
+}
+
+#location-search {
+  min-width: 70%;
+  display: inline;
+  right: 0;
+  bottom: 0;
+}
+
+.form-inline {
+  width: 100%;
 }
