@@ -5,18 +5,11 @@ import ToiletPopUp from './ToiletPopUp';
 export default function MapPin(props) {
 
     return (
-        <Marker position={[props.latitude, props.longitude]}
-            key={props.id}>
+        <Marker position={[props.latitude, props.longitude]} key={props.id}>
             <Popup autoPan={true}>
-                <ToiletPopUp 
-                    address={props.address}
-                    opening={props.opening}
-                    name={props.name}
-                    url={props.url}
-                    rating={props.rating}
-                    wheelchair={props.wheelchair}
+                <ToiletPopUp
+                    {...props}
                     latLng={`${props.latitude},${props.longitude}`}
-                    currentLatLng={props.currentLatLng}
                 />
             </Popup>
         </Marker>
