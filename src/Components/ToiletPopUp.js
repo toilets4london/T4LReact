@@ -44,8 +44,8 @@ export default function ToiletPopUp(props) {
             <ListGroup variant="flush">
                 {distance ? <ListGroup.Item><b>Distance : </b>{distance.toFixed(1) + " km "}</ListGroup.Item> : null}
                 {distance ? <ListGroup.Item><b>Walking time : </b>{formatDuration(distance * 720)}</ListGroup.Item> : null}
-                {props.opening ? <ListGroup.Item><b>Opening hours : </b>{props.opening}</ListGroup.Item> : null}
                 {props.name ? <ListGroup.Item><b>Name : </b>{props.name}</ListGroup.Item> : null}
+                {props.opening_hours ? <ListGroup.Item><b>Opening hours : </b>{props.opening_hours}</ListGroup.Item> : null}
                 {props.address ? <ListGroup.Item><b>Full address : </b>{props.address}</ListGroup.Item> : null}
                 <ListGroup.Item><b>Wheelchair accessible : </b>{props.wheelchair ? "Yes" : "No / no data provided"}</ListGroup.Item>
                 <ListGroup.Item><b>Baby change facilities : </b>{props.baby_change ? "Yes" : "No"}</ListGroup.Item>
