@@ -4,7 +4,6 @@
 
 - This is a basic web app showing Toilets4London's data. You are able to search for a London location or navigate to your location and see toilets near you. Approximate walking time and distance is shown. 
 - The web app is currently being hosted [on Netlify](https://londontoiletmap.netlify.app/).
-- Data comes from the Toilets4London API hosted at [https://toilets4london.herokuapp.com/](https://toilets4london.herokuapp.com/) - [source here](https://github.com/toilets4london/Toilets4LondonAPI).
 
 ## Credits
 
