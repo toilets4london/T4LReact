@@ -51,7 +51,9 @@ export default function ToiletPopUp(props) {
                 <ListGroup.Item><b>Baby change facilities : </b>{props.baby_change ? "Yes" : "No"}</ListGroup.Item>
                 {props.fee ? <ListGroup.Item><b>Fee : </b>{props.fee}</ListGroup.Item> : null}
                 {props.covid ? <ListGroup.Item><b>Notice : </b>{props.covid}</ListGroup.Item> : null}
-                <ListGroup.Item action href={props.url} target="_blank">See this toilet on the T4L API</ListGroup.Item>
+                {props.rating ? <ListGroup.Item><b>Avg rating : </b>{props.rating}</ListGroup.Item> : null}
+                {props.num_ratings ? <ListGroup.Item><b>Number of ratings : </b>{props.num_ratings}</ListGroup.Item> : null}
+                {props.id ? <ListGroup.Item><b>Toilets4London id : </b>{props.id}</ListGroup.Item> : null}
             </ListGroup>
         </Card>
     )
