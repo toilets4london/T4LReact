@@ -1,18 +1,31 @@
-import React, {useState} from 'react';
-import InteractiveMap from './Components/InteractiveMap.js';
-import SearchBar from './Components/SearchBar.js'
-import 'bootstrap/dist/css/bootstrap.css';
+import React, { useState } from "react";
+import InteractiveMap from "./Components/InteractiveMap.js";
+import SearchBar from "./Components/SearchBar.js";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
+import BoroughEmbeddableMap from "./Components/BoroughEmbeddableMap.js";
 
 function App() {
-
   const [searchQuery, setSearchQuery] = useState(null);
   const handleSearch = (query) => setSearchQuery(query);
 
   return (
-    <div className="full-page">
-      <SearchBar handleSearchQuery={handleSearch}/>
-      <InteractiveMap searchQuery={searchQuery}/>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <div className="full-page">
+            <SearchBar handleSearchQuery={handleSearch} />
+            <InteractiveMap searchQuery={searchQuery} />
+          </div>
+        </Route>
+        <Route path="/:borough">
+          <BoroughEmbeddableMap
+            searchQuery={searchQuery}
+            handleSearch={handleSearch}
+          />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

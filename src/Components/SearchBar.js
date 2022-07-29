@@ -14,7 +14,7 @@ function SearchBar(props) {
 
     return (
         <Navbar bg="primary" variant="dark" style={{ "zIndex": "1001", "borderRadius": "5px" }} expand="md" className="m-3" expanded={expanded}>
-            <Navbar.Brand>Toilets4London Map</Navbar.Brand>
+            <Navbar.Brand>{props.title ?? "Toilets4London Map"}</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")} />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Form inline onSubmit={handleSubmit}>

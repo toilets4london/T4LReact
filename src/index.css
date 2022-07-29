@@ -39,13 +39,22 @@
   margin-bottom: 60px !important;
 }
 
-#location-search {
-  min-width: 70%;
-  display: inline;
-  right: 0;
-  bottom: 0;
+.navbar-collapse > .form-inline {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.form-inline {
-  width: 100%;
+.form-inline > input {
+  flex-grow: 1;
+}
+
+.form-inline > button {
+  flex-grow: 1;
+  max-width: 300px;
+}
+
+.navbar-brand {
+  font-weight: bold;
 }
