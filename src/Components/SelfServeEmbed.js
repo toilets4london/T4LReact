@@ -16,7 +16,7 @@ export default function SelfServeEmbed() {
       </p>
       <h2>Make the most of Toilets4London</h2>
       <p>
-        <a href="mailto:nina@toilets4london.com">Get in touch with us today</a> if you would like to start managing toilet
+        <a href="https://www.toilets4london.com/#contact">Get in touch with us today</a> if you would like to start managing toilet
         data directly on the Toilets4London admin platform to keep the map as up
         to date as possible.
       </p>
