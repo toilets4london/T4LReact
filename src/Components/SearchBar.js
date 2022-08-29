@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, Form, FormControl, Button } from 'react-bootstrap';
+import { ReactComponent as Logo } from '../img/logo.svg';
 
 function SearchBar(props) {
 
@@ -13,8 +14,8 @@ function SearchBar(props) {
     }
 
     return (
-        <Navbar bg="primary" variant="dark" style={{ "zIndex": "1001", "borderRadius": "5px" }} expand="md" className="m-3" expanded={expanded}>
-            <Navbar.Brand>{props.title ?? "Toilets4London Map"}</Navbar.Brand>
+        <Navbar style={{ "zIndex": "1001", "background": "#007AFF" }} expand="md" className="m-3" expanded={expanded}>
+            <span style={{ "color": "white", "fontSize": "18px" }} className="mr-2"><Logo className="mr-2"/>{props.title ?? "Toilets4London"}</span>
             <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")} />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Form inline onSubmit={handleSubmit}>

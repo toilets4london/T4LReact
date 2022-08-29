@@ -5,7 +5,7 @@ import { client } from "../Client/client";
 import axios from "axios";
 import MapComponent from "./MapComponent";
 import { useParams } from "react-router-dom";
-import isValidBorough from "./Boroughs";
+import getValidBorough from "./Boroughs";
 import SearchBar from "./SearchBar";
 
 export default function BoroughEmbeddableMap(props) {
@@ -26,12 +26,13 @@ export default function BoroughEmbeddableMap(props) {
   }
 
   useEffect(() => {
-    if (!isValidBorough(borough)) {
+    const validBorough = getValidBorough(borough);
+    if (!validBorough) {
       return;
     }
     if (!isLoaded && !error) {
       client
-        .get(`/toilets/?borough=${borough}&page_size=2000`)
+        .get(`/toilets/?borough=${validBorough}&page_size=2000`)
         .then(
           (result) => {
             setToilets(result.data.results);
@@ -46,7 +47,8 @@ export default function BoroughEmbeddableMap(props) {
   }, [error, isLoaded, borough]);
 
   useEffect(() => {
-    if (isValidBorough(borough)) {
+    const validBorough = getValidBorough(borough);
+    if (validBorough) {
       const fetchData = async () => {
         const result = await axios(
           "https://nominatim.openstreetmap.org/search?q=" +
@@ -104,7 +106,7 @@ export default function BoroughEmbeddableMap(props) {
     );
   };
 
-  if (isValidBorough(borough)) {
+  if (getValidBorough(borough)) {
     return (
       <div className="full-page">
         <SearchBar
